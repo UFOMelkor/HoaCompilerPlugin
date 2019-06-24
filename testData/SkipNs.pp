@@ -1,0 +1,1 @@
+%skip   ns:space          \s

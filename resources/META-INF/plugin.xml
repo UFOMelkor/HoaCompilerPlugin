@@ -1,0 +1,34 @@
+<idea-plugin>
+    <id>io.ufomelkor.hoa.compiler.plugin.id</id>
+    <name>Hoa\Compiler Support</name>
+    <version>1.0</version>
+    <vendor email="oskar@programming-php.net" url="http://www.programming-php.net">Oskar Pfeifer-Bley</vendor>
+
+    <description><![CDATA[
+        This plugin adds support for the great library <a href="https://hoa-project.net/En/Literature/Hack/Compiler.html>Hoa\Compile</a>,
+        a PHP library for compiling grammers.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        Nothing changed yet, but it will in the future ;-)
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="PS-191.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.jetbrains.php</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory implementation="io.ufomelkor.hoa.compiler.plugin.PpFileTypeFactory" />
+        <lang.parserDefinition language="Pp" implementationClass="io.ufomelkor.hoa.compiler.plugin.PpParserDefinition"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>

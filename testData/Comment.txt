@@ -1,0 +1,6 @@
+PP File(0,47)
+  PpCommentImpl(COMMENT)(0,20)
+    PsiElement(PpTokenType.//[^\n\r]*)('// This is a comment')(0,20)
+  PsiWhiteSpace('\n\n')(20,22)
+  PpCommentImpl(COMMENT)(22,47)
+    PsiElement(PpTokenType.//[^\n\r]*)('// This is also a comment')(22,47)
