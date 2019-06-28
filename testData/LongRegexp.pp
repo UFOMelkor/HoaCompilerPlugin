@@ -1,0 +1,1 @@
+%token  op:date                 \b\d{2}\.\d{2}\.\d{4}\b -> val

@@ -20,11 +20,19 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.platform</depends>
     <depends>com.jetbrains.php</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileTypeFactory implementation="io.ufomelkor.hoa.compiler.plugin.PpFileTypeFactory" />
-        <lang.parserDefinition language="Pp" implementationClass="io.ufomelkor.hoa.compiler.plugin.PpParserDefinition"/>
+        <fileTypeFactory implementation="io.ufomelkor.hoa.compiler.lang.PpFileTypeFactory" />
+        <lang.parserDefinition language="PP" implementationClass="io.ufomelkor.hoa.compiler.lang.core.parser.PpParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.PpSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="io.ufomelkor.hoa.compiler.plugin.highlight.PpColorSettingsPage"/>
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightNodes" />
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightRuleCalls" />
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightNamespaces" />
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightTokens" />
+        <lang.psiStructureViewFactory language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.structure.PpStructureViewFactory"/>
     </extensions>
 
     <actions>
