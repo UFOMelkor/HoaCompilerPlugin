@@ -141,13 +141,14 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (Repetition|Simple) (Repetition|Simple)+
+  // (Repetition|Simple) (Repetition|Simple)+ TreeNode?
   public static boolean Concatenation(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Concatenation")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CONCATENATION, "<concatenation>");
     r = Concatenation_0(b, l + 1);
     r = r && Concatenation_1(b, l + 1);
+    r = r && Concatenation_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -183,6 +184,13 @@ public class PpParser implements PsiParser, LightPsiParser {
     r = Repetition(b, l + 1);
     if (!r) r = Simple(b, l + 1);
     return r;
+  }
+
+  // TreeNode?
+  private static boolean Concatenation_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Concatenation_2")) return false;
+    TreeNode(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -306,23 +314,15 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Simple Quantifier TreeNode?
+  // Simple Quantifier
   public static boolean Repetition(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Repetition")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, REPETITION, "<repetition>");
     r = Simple(b, l + 1);
     r = r && Quantifier(b, l + 1);
-    r = r && Repetition_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  // TreeNode?
-  private static boolean Repetition_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Repetition_2")) return false;
-    TreeNode(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */

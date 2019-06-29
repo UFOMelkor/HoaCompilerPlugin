@@ -39,10 +39,4 @@ public class PpRepetitionImpl extends ASTWrapperPsiElement implements PpRepetiti
     return findNotNullChildByClass(PpSimple.class);
   }
 
-  @Override
-  @Nullable
-  public PpTreeNode getTreeNode() {
-    return findChildByClass(PpTreeNode.class);
-  }
-
 }

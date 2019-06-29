@@ -23,4 +23,10 @@ public interface PpToken extends PpElement {
   @Nullable
   String getName();
 
+  @Nullable
+  String getCurrentNamespace();
+
+  @Nullable
+  String getNextNamespace();
+
 }

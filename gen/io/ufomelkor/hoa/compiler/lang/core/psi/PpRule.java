@@ -29,6 +29,8 @@ public interface PpRule extends PpElement {
   @Nullable
   PpSimple getSimple();
 
+  boolean isNode();
+
   @Nullable
   String getName();
 

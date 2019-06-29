@@ -14,4 +14,7 @@ public interface PpConcatenation extends PpElement {
   @NotNull
   List<PpSimple> getSimpleList();
 
+  @Nullable
+  PpTreeNode getTreeNode();
+
 }

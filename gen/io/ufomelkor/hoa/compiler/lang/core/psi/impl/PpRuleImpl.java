@@ -70,6 +70,11 @@ public class PpRuleImpl extends ASTWrapperPsiElement implements PpRule {
   }
 
   @Override
+  public boolean isNode() {
+    return PpPsiImplUtil.isNode(this);
+  }
+
+  @Override
   @Nullable
   public String getName() {
     return PpPsiImplUtil.getName(this);

@@ -57,4 +57,16 @@ public class PpTokenImpl extends ASTWrapperPsiElement implements PpToken {
     return PpPsiImplUtil.getName(this);
   }
 
+  @Override
+  @Nullable
+  public String getCurrentNamespace() {
+    return PpPsiImplUtil.getCurrentNamespace(this);
+  }
+
+  @Override
+  @Nullable
+  public String getNextNamespace() {
+    return PpPsiImplUtil.getNextNamespace(this);
+  }
+
 }

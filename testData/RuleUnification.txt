@@ -1,6 +1,7 @@
 PP File(0,46)
   PpRuleImpl(RULE)(0,46)
-    PsiElement(PpTokenType.T_RULE_NAME)('string')(0,6)
+    PpRuleNameImpl(RULE_NAME)(0,6)
+      PsiElement(PpTokenType.T_RULE_NAME)('string')(0,6)
     PsiElement(PpTokenType.:)(':')(6,7)
     PsiWhiteSpace('\n    ')(7,12)
     PpConcatenationImpl(CONCATENATION)(12,46)

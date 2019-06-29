@@ -48,20 +48,20 @@
 File ::= (Comment|Skip|Token|Rule)* // Skip|Token|Choice
 Comment ::= T_COMMENT
 
-Skip ::= T_SKIP T_SPACES (Namespace T_COLON)? SkipName T_SPACES RegExp {methods=[getName]}
+Skip ::= T_SKIP T_SPACES (Namespace T_COLON)? SkipName T_SPACES RegExp {methods=[getName, getCurrentNamespace]}
 Namespace ::= T_NAME
 SkipName ::= T_NAME
 RegExp ::= T_REGEXP+
-Token ::= T_TOKEN T_SPACES (Namespace T_COLON)? TokenName T_SPACES RegExp (T_SPACES SwitchNamespace)? {methods=[getName]}
+Token ::= T_TOKEN T_SPACES (Namespace T_COLON)? TokenName T_SPACES RegExp (T_SPACES SwitchNamespace)? {methods=[getName, getCurrentNamespace, getNextNamespace]}
 TokenName ::= T_NAME
 SwitchNamespace ::= T_SWITCH_NAMESPACE T_SPACES T_NAME
 
-Rule ::= (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple) {methods=[getName]}
+Rule ::= (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode, getName]}
 RuleName ::= T_RULE_NAME
 NodeRuleName ::= T_HASH T_RULE_NAME
 Choice ::= (Concatenation|Repetition|Simple) (T_OR (Concatenation|Repetition|Simple))+
-Concatenation ::= (Repetition|Simple) (Repetition|Simple)+
-Repetition ::= Simple Quantifier TreeNode?
+Concatenation ::= (Repetition|Simple) (Repetition|Simple)+ TreeNode?
+Repetition ::= Simple Quantifier
 TreeNode ::= T_HASH T_NAME
 
 Simple ::= (Capturing | Skipped | Kept | Named) TreeNode? Comment?

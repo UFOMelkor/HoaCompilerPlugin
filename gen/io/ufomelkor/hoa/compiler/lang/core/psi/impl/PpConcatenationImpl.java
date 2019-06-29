@@ -39,4 +39,10 @@ public class PpConcatenationImpl extends ASTWrapperPsiElement implements PpConca
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PpSimple.class);
   }
 
+  @Override
+  @Nullable
+  public PpTreeNode getTreeNode() {
+    return findChildByClass(PpTreeNode.class);
+  }
+
 }

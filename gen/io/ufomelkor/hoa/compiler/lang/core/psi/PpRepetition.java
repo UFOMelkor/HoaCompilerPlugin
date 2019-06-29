@@ -14,7 +14,4 @@ public interface PpRepetition extends PpElement {
   @NotNull
   PpSimple getSimple();
 
-  @Nullable
-  PpTreeNode getTreeNode();
-
 }

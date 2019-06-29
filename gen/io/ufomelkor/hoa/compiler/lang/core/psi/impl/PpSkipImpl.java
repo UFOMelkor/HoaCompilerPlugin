@@ -51,4 +51,10 @@ public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
     return PpPsiImplUtil.getName(this);
   }
 
+  @Override
+  @NotNull
+  public String getCurrentNamespace() {
+    return PpPsiImplUtil.getCurrentNamespace(this);
+  }
+
 }

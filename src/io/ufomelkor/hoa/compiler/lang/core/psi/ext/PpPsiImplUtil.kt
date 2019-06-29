@@ -1,9 +1,6 @@
 package io.ufomelkor.hoa.compiler.lang.core.psi.ext
 
-import io.ufomelkor.hoa.compiler.lang.core.psi.PpRule
-import io.ufomelkor.hoa.compiler.lang.core.psi.PpSkip
-import io.ufomelkor.hoa.compiler.lang.core.psi.PpToken
-import io.ufomelkor.hoa.compiler.lang.core.psi.PpTypes
+import io.ufomelkor.hoa.compiler.lang.core.psi.*
 
 object PpPsiImplUtil {
     @JvmStatic
@@ -14,8 +11,20 @@ object PpPsiImplUtil {
     }
 
     @JvmStatic
+    fun isNode(element: PpRule): Boolean = element.node?.findChildByType(PpTypes.NODE_RULE_NAME) != null
+
+    @JvmStatic
     fun getName(element: PpToken): String? = element.node?.findChildByType(PpTypes.TOKEN_NAME)?.findChildByType(PpTypes.T_NAME)?.text
 
     @JvmStatic
     fun getName(element: PpSkip): String? = element.node?.findChildByType(PpTypes.SKIP_NAME)?.findChildByType(PpTypes.T_NAME)?.text
+
+    @JvmStatic
+    fun getCurrentNamespace(element: PpSkip): String = element.node?.findChildByType(PpTypes.NAMESPACE)?.findChildByType(PpTypes.T_NAME)?.text ?: "default"
+
+    @JvmStatic
+    fun getCurrentNamespace(element: PpToken): String? = element.node?.findChildByType(PpTypes.NAMESPACE)?.findChildByType(PpTypes.T_NAME)?.text ?: "default"
+
+    @JvmStatic
+    fun getNextNamespace(element: PpToken): String? = element.node?.findChildByType(PpTypes.SWITCH_NAMESPACE)?.findChildByType(PpTypes.T_NAME)?.text ?: getCurrentNamespace(element)
 }

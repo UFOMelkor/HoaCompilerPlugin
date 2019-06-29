@@ -20,4 +20,7 @@ public interface PpSkip extends PpElement {
   @Nullable
   String getName();
 
+  @NotNull
+  String getCurrentNamespace();
+
 }

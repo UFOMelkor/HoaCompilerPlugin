@@ -1,6 +1,7 @@
 PP File(0,25)
   PpRuleImpl(RULE)(0,25)
-    PsiElement(PpTokenType.T_RULE_NAME)('number')(0,6)
+    PpRuleNameImpl(RULE_NAME)(0,6)
+      PsiElement(PpTokenType.T_RULE_NAME)('number')(0,6)
     PsiElement(PpTokenType.:)(':')(6,7)
     PsiWhiteSpace('\n    ')(7,12)
     PpRepetitionImpl(REPETITION)(12,25)

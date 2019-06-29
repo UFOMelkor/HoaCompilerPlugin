@@ -1,6 +1,7 @@
 PP File(0,27)
   PpRuleImpl(RULE)(0,27)
-    PsiElement(PpTokenType.T_RULE_NAME)('value')(0,5)
+    PpRuleNameImpl(RULE_NAME)(0,5)
+      PsiElement(PpTokenType.T_RULE_NAME)('value')(0,5)
     PsiElement(PpTokenType.:)(':')(5,6)
     PsiWhiteSpace('\n    ')(6,11)
     PpChoiceImpl(CHOICE)(11,27)
