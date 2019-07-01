@@ -60,7 +60,7 @@ Token ::= T_TOKEN (T_SPACES (Namespace T_COLON)? TokenName?)? (T_SPACES RegExp)?
 TokenName ::= T_NAME
 SwitchNamespace ::= T_SWITCH_NAMESPACE (T_SPACES T_NAME?)?
 
-Rule ::= (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode getName]}
+Rule ::= (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode getName]}
 RuleName ::= T_RULE_NAME
 NodeRuleName ::= T_HASH T_RULE_NAME
 Choice ::= (Concatenation|Repetition|Simple) (T_OR (Concatenation|Repetition|Simple))+

@@ -1,0 +1,3 @@
+PP File(0,33)
+  PpCommentImpl(COMMENT)(0,33)
+    PsiElement(PpTokenType.//[^\n\r]*)('/ This comment is missing a slash')(0,33)

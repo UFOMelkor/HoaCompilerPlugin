@@ -24,6 +24,7 @@ T_SPACES=[ \t\f]+
 WHITE_SPACE=\s+
 
 T_COMMENT = \/\/[^\n\r]*
+T_COMMENT_ONE_SLASH = \/[^\n\r]*
 T_SKIP = "%skip"
 T_TOKEN = "%token"
 T_SWITCH_NAMESPACE = "->"
@@ -56,12 +57,13 @@ T_UNIFICATION_END = "]"
 %%
 
 <YYINITIAL> {
-    {WHITE_SPACE}         { return WHITE_SPACE; }
-    {T_COMMENT}           { return T_COMMENT; }
-    {T_SKIP}              { vSpaces = 0; yybegin(LEXEME); return T_SKIP; }
-    {T_TOKEN}             { vSpaces = 0; yybegin(LEXEME); return T_TOKEN; }
-    {T_SWITCH_NAMESPACE}  { vSpaces = 0; return T_SWITCH_NAMESPACE; }
-    ^{T_NAME}             { yybegin(RULE); return T_RULE_NAME; }
+    {WHITE_SPACE}           { return WHITE_SPACE; }
+    {T_COMMENT}             { return T_COMMENT; }
+    ^{T_COMMENT_ONE_SLASH}  { return T_COMMENT; }
+    {T_SKIP}                { vSpaces = 0; yybegin(LEXEME); return T_SKIP; }
+    {T_TOKEN}               { vSpaces = 0; yybegin(LEXEME); return T_TOKEN; }
+    {T_SWITCH_NAMESPACE}    { vSpaces = 0; return T_SWITCH_NAMESPACE; }
+    ^{T_NAME}               { yybegin(RULE); return T_RULE_NAME; }
 }
 
 <LEXEME> {
@@ -81,6 +83,7 @@ T_UNIFICATION_END = "]"
     ^{T_HASH}               { yybegin(RULE_NAME); return T_HASH; }
     {T_HASH}                { return T_HASH; }
     {T_COMMENT}             { return T_COMMENT; }
+    ^{T_COMMENT_ONE_SLASH}  { return T_COMMENT; }
     {T_COLON}               { return T_COLON; }
     {T_OR}                  { return T_OR; }
     {T_ZERO_OR_ONE}         { return T_ZERO_OR_ONE; }

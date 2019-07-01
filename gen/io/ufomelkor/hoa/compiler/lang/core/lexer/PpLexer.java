@@ -69,9 +69,9 @@ class PpLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\6\0\1\1\3\0\1\2\1\3\2\4\1\5\1\6"+
-    "\1\3\1\7\1\10\1\11\1\12\1\13\1\14\1\15"+
-    "\1\16\1\17\1\20\1\21\1\0\1\22\1\23\1\24"+
+    "\6\0\1\1\3\0\1\2\1\3\1\4\2\5\1\6"+
+    "\1\7\1\4\1\10\1\11\1\12\1\13\1\14\1\15"+
+    "\1\16\1\17\1\20\1\21\1\22\1\0\1\23\1\24"+
     "\1\25\1\26\1\27\1\30\1\31\1\32\2\0\2\33"+
     "\1\34\2\0\1\35\4\0\1\36\4\0\1\37\1\40"+
     "\1\41\2\0\1\42\1\43";
@@ -104,12 +104,12 @@ class PpLexer implements FlexLexer {
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\42\0\104\0\146\0\210\0\252\0\314\0\356"+
     "\0\u0110\0\u0132\0\u0154\0\u0176\0\u0198\0\u01ba\0\u01dc\0\u01fe"+
-    "\0\u0220\0\u0242\0\u0198\0\u0264\0\u0198\0\u0286\0\u02a8\0\u0198"+
-    "\0\u0198\0\u0198\0\u0198\0\u0198\0\u02ca\0\u0198\0\u02ec\0\u0198"+
-    "\0\u0198\0\u0198\0\u030e\0\u0198\0\u0198\0\u0330\0\u0352\0\u0374"+
-    "\0\u0198\0\u0176\0\u0198\0\u0396\0\u03b8\0\u0198\0\u03da\0\u03fc"+
-    "\0\u041e\0\u0440\0\u0198\0\u0462\0\u0484\0\u04a6\0\u04c8\0\u0198"+
-    "\0\u0198\0\u0198\0\u04ea\0\u050c\0\u0198\0\u0198";
+    "\0\u0220\0\u0242\0\u0264\0\u01ba\0\u0286\0\u01ba\0\u02a8\0\u02ca"+
+    "\0\u01ba\0\u01ba\0\u01ba\0\u01ba\0\u01ba\0\u02ec\0\u01ba\0\u030e"+
+    "\0\u01ba\0\u01ba\0\u01ba\0\u0330\0\u01ba\0\u01ba\0\u0352\0\u0374"+
+    "\0\u01ba\0\u0198\0\u01ba\0\u0396\0\u03b8\0\u01ba\0\u03da\0\u03fc"+
+    "\0\u041e\0\u0440\0\u01ba\0\u0462\0\u0484\0\u04a6\0\u04c8\0\u01ba"+
+    "\0\u01ba\0\u01ba\0\u04ea\0\u050c\0\u01ba\0\u01ba";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[62];
@@ -136,23 +136,23 @@ class PpLexer implements FlexLexer {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\0\5\7\1\10\1\11\10\0\1\12\22\0\5\7"+
-    "\1\10\1\11\10\13\1\12\1\0\1\13\17\0\1\14"+
-    "\2\15\1\16\1\17\1\0\2\14\10\20\1\21\1\14"+
-    "\1\20\1\22\1\23\15\14\1\0\5\7\1\10\1\0"+
-    "\10\24\1\0\1\25\1\24\1\26\1\27\1\30\1\31"+
-    "\1\32\1\33\1\34\1\35\2\0\1\36\1\37\1\40"+
-    "\1\41\1\42\1\0\5\7\1\10\1\0\10\43\1\0"+
-    "\1\25\1\43\1\26\1\27\1\44\1\31\1\32\1\33"+
-    "\1\34\1\35\2\0\1\36\1\37\1\40\1\41\1\42"+
-    "\10\0\10\13\2\0\1\13\1\0\1\45\16\0\5\7"+
-    "\42\0\1\46\43\0\1\47\3\0\1\50\46\0\1\51"+
-    "\30\0\10\13\2\0\2\13\16\0\1\14\5\0\2\14"+
-    "\10\0\2\14\3\0\15\14\44\0\1\15\43\0\1\17"+
-    "\45\0\10\20\2\0\2\20\16\0\1\14\5\0\2\14"+
-    "\10\0\1\14\1\52\3\0\15\14\23\0\1\22\26\0"+
-    "\10\24\2\0\2\24\41\0\1\26\42\0\1\53\16\0"+
-    "\5\35\15\0\1\54\7\0\1\55\45\0\1\56\12\0"+
-    "\10\43\2\0\2\43\16\0\2\46\2\0\36\46\11\0"+
+    "\1\13\1\11\10\14\1\12\1\0\1\14\17\0\1\15"+
+    "\2\16\1\17\1\20\1\0\2\15\10\21\1\22\1\15"+
+    "\1\21\1\23\1\24\15\15\1\0\5\7\1\10\1\0"+
+    "\10\25\1\0\1\26\1\25\1\27\1\30\1\31\1\32"+
+    "\1\33\1\34\1\35\1\36\2\0\1\37\1\40\1\41"+
+    "\1\42\1\43\1\0\5\7\1\13\1\0\10\44\1\0"+
+    "\1\26\1\44\1\27\1\30\1\45\1\32\1\33\1\34"+
+    "\1\35\1\36\2\0\1\37\1\40\1\41\1\42\1\43"+
+    "\10\0\10\14\2\0\1\14\1\0\1\46\16\0\5\7"+
+    "\42\0\1\13\43\0\1\47\3\0\1\50\46\0\1\51"+
+    "\20\0\2\13\2\0\36\13\10\0\10\14\2\0\2\14"+
+    "\16\0\1\15\5\0\2\15\10\0\2\15\3\0\15\15"+
+    "\44\0\1\16\43\0\1\20\45\0\10\21\2\0\2\21"+
+    "\16\0\1\15\5\0\2\15\10\0\1\15\1\52\3\0"+
+    "\15\15\23\0\1\23\26\0\10\25\2\0\2\25\41\0"+
+    "\1\27\42\0\1\53\16\0\5\36\15\0\1\54\7\0"+
+    "\1\55\45\0\1\56\12\0\10\44\2\0\2\44\27\0"+
     "\1\57\45\0\1\60\25\0\5\61\15\0\1\54\7\0"+
     "\1\62\1\63\6\0\5\55\15\0\1\64\30\0\1\65"+
     "\40\0\1\66\31\0\5\61\25\0\1\62\1\63\6\0"+
@@ -200,10 +200,10 @@ class PpLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\6\0\1\1\3\0\2\1\1\11\5\1\1\11\1\1"+
+    "\6\0\1\1\3\0\3\1\1\11\5\1\1\11\1\1"+
     "\1\11\2\1\5\11\1\0\1\11\1\1\3\11\1\1"+
-    "\2\11\1\1\2\0\1\11\1\1\1\11\2\0\1\11"+
-    "\4\0\1\11\4\0\3\11\2\0\2\11";
+    "\2\11\2\0\1\11\1\1\1\11\2\0\1\11\4\0"+
+    "\1\11\4\0\3\11\2\0\2\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[62];
@@ -561,127 +561,127 @@ class PpLexer implements FlexLexer {
             // fall through
           case 36: break;
           case 2: 
-            { yybegin(RULE); return T_RULE_NAME;
+            { return T_COMMENT;
             } 
             // fall through
           case 37: break;
           case 3: 
-            { if (yytext().equals("->")) { vSpaces = 0; return T_SWITCH_NAMESPACE;} return T_REGEXP;
+            { yybegin(RULE); return T_RULE_NAME;
             } 
             // fall through
           case 38: break;
           case 4: 
-            { yybegin(YYINITIAL); return WHITE_SPACE;
+            { if (yytext().equals("->")) { vSpaces = 0; return T_SWITCH_NAMESPACE;} return T_REGEXP;
             } 
             // fall through
           case 39: break;
           case 5: 
-            { vSpaces += 1; return T_SPACES;
+            { yybegin(YYINITIAL); return WHITE_SPACE;
             } 
             // fall through
           case 40: break;
           case 6: 
-            { return vSpaces > 1 ? T_REGEXP : T_NAME;
+            { vSpaces += 1; return T_SPACES;
             } 
             // fall through
           case 41: break;
           case 7: 
-            { return T_REGEXP;
+            { return vSpaces > 1 ? T_REGEXP : T_NAME;
             } 
             // fall through
           case 42: break;
           case 8: 
-            { return vSpaces > 1 ? T_REGEXP : T_COLON;
+            { return T_REGEXP;
             } 
             // fall through
           case 43: break;
           case 9: 
-            { return T_NAME;
+            { return vSpaces > 1 ? T_REGEXP : T_COLON;
             } 
             // fall through
           case 44: break;
           case 10: 
-            { return T_KEPT_END;
+            { return T_NAME;
             } 
             // fall through
           case 45: break;
           case 11: 
-            { return T_UNIFICATION;
+            { return T_KEPT_END;
             } 
             // fall through
           case 46: break;
           case 12: 
-            { return T_COLON;
+            { return T_UNIFICATION;
             } 
             // fall through
           case 47: break;
           case 13: 
-            { return T_HASH;
+            { return T_COLON;
             } 
             // fall through
           case 48: break;
           case 14: 
-            { return T_OR;
+            { return T_HASH;
             } 
             // fall through
           case 49: break;
           case 15: 
-            { return T_ZERO_OR_ONE;
+            { return T_OR;
             } 
             // fall through
           case 50: break;
           case 16: 
-            { return T_ONE_OR_MORE;
+            { return T_ZERO_OR_ONE;
             } 
             // fall through
           case 51: break;
           case 17: 
-            { return T_ZERO_OR_MORE;
+            { return T_ONE_OR_MORE;
             } 
             // fall through
           case 52: break;
           case 18: 
-            { return T_KEPT_BEGIN;
+            { return T_ZERO_OR_MORE;
             } 
             // fall through
           case 53: break;
           case 19: 
-            { return T_CAPTURING_BEGIN;
+            { return T_KEPT_BEGIN;
             } 
             // fall through
           case 54: break;
           case 20: 
-            { return T_CAPTURING_END;
+            { return T_CAPTURING_BEGIN;
             } 
             // fall through
           case 55: break;
           case 21: 
-            { return T_UNIFICATION_BEGIN;
+            { return T_CAPTURING_END;
             } 
             // fall through
           case 56: break;
           case 22: 
-            { return T_UNIFICATION_END;
+            { return T_UNIFICATION_BEGIN;
             } 
             // fall through
           case 57: break;
           case 23: 
-            { return T_RULE_NAME;
+            { return T_UNIFICATION_END;
             } 
             // fall through
           case 58: break;
           case 24: 
-            { yybegin(RULE_NAME); return T_HASH;
+            { return T_RULE_NAME;
             } 
             // fall through
           case 59: break;
           case 25: 
-            { yybegin(RULE); return T_COLON;
+            { yybegin(RULE_NAME); return T_HASH;
             } 
             // fall through
           case 60: break;
           case 26: 
-            { return T_COMMENT;
+            { yybegin(RULE); return T_COLON;
             } 
             // fall through
           case 61: break;

@@ -32,6 +32,7 @@
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightRuleCalls" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightNamespaces" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.highlight.HighlightTokens" />
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotation.MissingSlashAtCommentStart" />
         <lang.psiStructureViewFactory language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.structure.PpStructureViewFactory"/>
         <completion.contributor language="PP" implementationClass="io.ufomelkor.hoa.compiler.lang.core.completion.CompleteKeywords"/>
         <psi.referenceContributor implementation="io.ufomelkor.hoa.compiler.lang.core.PpReferenceContributor" />

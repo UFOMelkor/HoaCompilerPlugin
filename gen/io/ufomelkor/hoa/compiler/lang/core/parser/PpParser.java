@@ -328,14 +328,14 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple)
+  // (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple)
   public static boolean Rule(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Rule")) return false;
     if (!nextTokenIs(b, "<rule>", T_HASH, T_RULE_NAME)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RULE, "<rule>");
     r = Rule_0(b, l + 1);
-    r = r && consumeToken(b, T_COLON);
+    r = r && Rule_1(b, l + 1);
     r = r && Rule_2(b, l + 1);
     r = r && Rule_3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -349,6 +349,13 @@ public class PpParser implements PsiParser, LightPsiParser {
     r = RuleName(b, l + 1);
     if (!r) r = NodeRuleName(b, l + 1);
     return r;
+  }
+
+  // T_COLON?
+  private static boolean Rule_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Rule_1")) return false;
+    consumeToken(b, T_COLON);
+    return true;
   }
 
   // Comment?
