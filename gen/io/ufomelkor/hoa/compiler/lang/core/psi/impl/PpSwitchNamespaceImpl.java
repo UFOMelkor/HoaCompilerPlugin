@@ -28,9 +28,9 @@ public class PpSwitchNamespaceImpl extends ASTWrapperPsiElement implements PpSwi
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getTSpaces() {
-    return findNotNullChildByType(T_SPACES);
+    return findChildByType(T_SPACES);
   }
 
 }

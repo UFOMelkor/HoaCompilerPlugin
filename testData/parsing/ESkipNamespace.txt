@@ -1,0 +1,7 @@
+PP File(0,13)
+  PpSkipImpl(SKIP)(0,13)
+    PsiElement(PpTokenType.%skip)('%skip')(0,5)
+    PsiElement(PpTokenType.T_SPACES)(' ')(5,6)
+    PpNamespaceImpl(NAMESPACE)(6,12)
+      PsiElement(PpTokenType.[a-zA-Z_][a-zA-Z0-9_]*)('string')(6,12)
+    PsiElement(PpTokenType.:)(':')(12,13)

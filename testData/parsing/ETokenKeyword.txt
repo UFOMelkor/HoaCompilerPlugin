@@ -1,0 +1,3 @@
+PP File(0,6)
+  PpTokenImpl(TOKEN)(0,6)
+    PsiElement(PpTokenType.%token)('%token')(0,6)

@@ -11,10 +11,10 @@ public interface PpSkip extends PpElement {
   @Nullable
   PpNamespace getNamespace();
 
-  @NotNull
+  @Nullable
   PpRegExp getRegExp();
 
-  @NotNull
+  @Nullable
   PpSkipName getSkipName();
 
   @Nullable

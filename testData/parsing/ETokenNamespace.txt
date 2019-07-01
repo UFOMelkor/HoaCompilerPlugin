@@ -1,0 +1,7 @@
+PP File(0,14)
+  PpTokenImpl(TOKEN)(0,14)
+    PsiElement(PpTokenType.%token)('%token')(0,6)
+    PsiElement(PpTokenType.T_SPACES)(' ')(6,7)
+    PpNamespaceImpl(NAMESPACE)(7,13)
+      PsiElement(PpTokenType.[a-zA-Z_][a-zA-Z0-9_]*)('string')(7,13)
+    PsiElement(PpTokenType.:)(':')(13,14)

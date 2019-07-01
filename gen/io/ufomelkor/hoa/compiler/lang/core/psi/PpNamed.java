@@ -8,4 +8,7 @@ import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 
 public interface PpNamed extends PpElement {
 
+  @NotNull
+  PpRuleCall getRuleCall();
+
 }

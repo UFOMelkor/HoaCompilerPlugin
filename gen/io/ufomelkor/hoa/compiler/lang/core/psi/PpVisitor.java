@@ -4,6 +4,7 @@ package io.ufomelkor.hoa.compiler.lang.core.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
+import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement;
 
 public class PpVisitor extends PsiElementVisitor {
 
@@ -55,6 +56,10 @@ public class PpVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitRuleCall(@NotNull PpRuleCall o) {
+    visitElement(o);
+  }
+
   public void visitRuleName(@NotNull PpRuleName o) {
     visitElement(o);
   }
@@ -80,6 +85,10 @@ public class PpVisitor extends PsiElementVisitor {
   }
 
   public void visitToken(@NotNull PpToken o) {
+    visitNamedElement(o);
+  }
+
+  public void visitTokenCall(@NotNull PpTokenCall o) {
     visitElement(o);
   }
 
@@ -92,6 +101,10 @@ public class PpVisitor extends PsiElementVisitor {
   }
 
   public void visitUnification(@NotNull PpUnification o) {
+    visitElement(o);
+  }
+
+  public void visitNamedElement(@NotNull PpNamedElement o) {
     visitElement(o);
   }
 

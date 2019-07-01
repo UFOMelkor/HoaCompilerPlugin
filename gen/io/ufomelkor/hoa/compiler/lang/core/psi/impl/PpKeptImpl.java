@@ -28,6 +28,12 @@ public class PpKeptImpl extends ASTWrapperPsiElement implements PpKept {
   }
 
   @Override
+  @NotNull
+  public PpTokenCall getTokenCall() {
+    return findNotNullChildByClass(PpTokenCall.class);
+  }
+
+  @Override
   @Nullable
   public PpUnification getUnification() {
     return findChildByClass(PpUnification.class);

@@ -1,0 +1,3 @@
+PP File(0,5)
+  PpSkipImpl(SKIP)(0,5)
+    PsiElement(PpTokenType.%skip)('%skip')(0,5)

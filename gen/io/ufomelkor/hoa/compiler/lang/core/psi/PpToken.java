@@ -4,29 +4,35 @@ package io.ufomelkor.hoa.compiler.lang.core.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
+import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement;
 
-public interface PpToken extends PpElement {
+public interface PpToken extends PpNamedElement {
 
   @Nullable
   PpNamespace getNamespace();
 
-  @NotNull
+  @Nullable
   PpRegExp getRegExp();
 
   @Nullable
   PpSwitchNamespace getSwitchNamespace();
 
-  @NotNull
-  PpTokenName getTokenName();
-
   @Nullable
-  String getName();
+  PpTokenName getTokenName();
 
   @Nullable
   String getCurrentNamespace();
 
   @Nullable
   String getNextNamespace();
+
+  @Nullable
+  String getName();
+
+  @NotNull
+  PsiElement setName(@NotNull String newName);
+
+  @Nullable
+  PsiElement getNameIdentifier();
 
 }

@@ -27,4 +27,10 @@ public class PpNamedImpl extends ASTWrapperPsiElement implements PpNamed {
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PpRuleCall getRuleCall() {
+    return findNotNullChildByClass(PpRuleCall.class);
+  }
+
 }

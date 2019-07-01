@@ -217,13 +217,14 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_KEPT_BEGIN T_NAME Unification? T_KEPT_END
+  // T_KEPT_BEGIN TokenCall Unification? T_KEPT_END
   public static boolean Kept(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Kept")) return false;
     if (!nextTokenIs(b, T_KEPT_BEGIN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_KEPT_BEGIN, T_NAME);
+    r = consumeToken(b, T_KEPT_BEGIN);
+    r = r && TokenCall(b, l + 1);
     r = r && Kept_2(b, l + 1);
     r = r && consumeToken(b, T_KEPT_END);
     exit_section_(b, m, KEPT, r);
@@ -238,13 +239,14 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_NAME T_NAMED
+  // RuleCall T_NAMED
   public static boolean Named(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Named")) return false;
     if (!nextTokenIs(b, T_NAME)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_NAME, T_NAMED);
+    r = RuleCall(b, l + 1);
+    r = r && consumeToken(b, T_NAMED);
     exit_section_(b, m, NAMED, r);
     return r;
   }
@@ -368,6 +370,18 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // T_NAME
+  public static boolean RuleCall(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "RuleCall")) return false;
+    if (!nextTokenIs(b, T_NAME)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_NAME);
+    exit_section_(b, m, RULE_CALL, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // T_RULE_NAME
   public static boolean RuleName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "RuleName")) return false;
@@ -418,35 +432,77 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_SKIP T_SPACES (Namespace T_COLON)? SkipName T_SPACES RegExp
+  // T_SKIP (T_SPACES (Namespace T_COLON)? SkipName?)? (T_SPACES RegExp)?
   public static boolean Skip(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Skip")) return false;
     if (!nextTokenIs(b, T_SKIP)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_SKIP, T_SPACES);
+    r = consumeToken(b, T_SKIP);
+    r = r && Skip_1(b, l + 1);
     r = r && Skip_2(b, l + 1);
-    r = r && SkipName(b, l + 1);
-    r = r && consumeToken(b, T_SPACES);
-    r = r && RegExp(b, l + 1);
     exit_section_(b, m, SKIP, r);
     return r;
   }
 
+  // (T_SPACES (Namespace T_COLON)? SkipName?)?
+  private static boolean Skip_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Skip_1")) return false;
+    Skip_1_0(b, l + 1);
+    return true;
+  }
+
+  // T_SPACES (Namespace T_COLON)? SkipName?
+  private static boolean Skip_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Skip_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_SPACES);
+    r = r && Skip_1_0_1(b, l + 1);
+    r = r && Skip_1_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // (Namespace T_COLON)?
+  private static boolean Skip_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Skip_1_0_1")) return false;
+    Skip_1_0_1_0(b, l + 1);
+    return true;
+  }
+
+  // Namespace T_COLON
+  private static boolean Skip_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Skip_1_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = Namespace(b, l + 1);
+    r = r && consumeToken(b, T_COLON);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // SkipName?
+  private static boolean Skip_1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Skip_1_0_2")) return false;
+    SkipName(b, l + 1);
+    return true;
+  }
+
+  // (T_SPACES RegExp)?
   private static boolean Skip_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Skip_2")) return false;
     Skip_2_0(b, l + 1);
     return true;
   }
 
-  // Namespace T_COLON
+  // T_SPACES RegExp
   private static boolean Skip_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Skip_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Namespace(b, l + 1);
-    r = r && consumeToken(b, T_COLON);
+    r = consumeToken(b, T_SPACES);
+    r = r && RegExp(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -464,13 +520,14 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_SKIPPED T_NAME Unification? T_SKIPPED
+  // T_SKIPPED TokenCall Unification? T_SKIPPED
   public static boolean Skipped(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Skipped")) return false;
     if (!nextTokenIs(b, T_SKIPPED)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_SKIPPED, T_NAME);
+    r = consumeToken(b, T_SKIPPED);
+    r = r && TokenCall(b, l + 1);
     r = r && Skipped_2(b, l + 1);
     r = r && consumeToken(b, T_SKIPPED);
     exit_section_(b, m, SKIPPED, r);
@@ -485,44 +542,87 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_SWITCH_NAMESPACE T_SPACES T_NAME
+  // T_SWITCH_NAMESPACE (T_SPACES T_NAME?)?
   public static boolean SwitchNamespace(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "SwitchNamespace")) return false;
     if (!nextTokenIs(b, T_SWITCH_NAMESPACE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_SWITCH_NAMESPACE, T_SPACES, T_NAME);
+    r = consumeToken(b, T_SWITCH_NAMESPACE);
+    r = r && SwitchNamespace_1(b, l + 1);
     exit_section_(b, m, SWITCH_NAMESPACE, r);
     return r;
   }
 
+  // (T_SPACES T_NAME?)?
+  private static boolean SwitchNamespace_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SwitchNamespace_1")) return false;
+    SwitchNamespace_1_0(b, l + 1);
+    return true;
+  }
+
+  // T_SPACES T_NAME?
+  private static boolean SwitchNamespace_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SwitchNamespace_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_SPACES);
+    r = r && SwitchNamespace_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // T_NAME?
+  private static boolean SwitchNamespace_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "SwitchNamespace_1_0_1")) return false;
+    consumeToken(b, T_NAME);
+    return true;
+  }
+
   /* ********************************************************** */
-  // T_TOKEN T_SPACES (Namespace T_COLON)? TokenName T_SPACES RegExp (T_SPACES SwitchNamespace)?
+  // T_TOKEN (T_SPACES (Namespace T_COLON)? TokenName?)? (T_SPACES RegExp)? (T_SPACES SwitchNamespace)?
   public static boolean Token(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Token")) return false;
     if (!nextTokenIs(b, T_TOKEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_TOKEN, T_SPACES);
+    r = consumeToken(b, T_TOKEN);
+    r = r && Token_1(b, l + 1);
     r = r && Token_2(b, l + 1);
-    r = r && TokenName(b, l + 1);
-    r = r && consumeToken(b, T_SPACES);
-    r = r && RegExp(b, l + 1);
-    r = r && Token_6(b, l + 1);
+    r = r && Token_3(b, l + 1);
     exit_section_(b, m, TOKEN, r);
     return r;
   }
 
+  // (T_SPACES (Namespace T_COLON)? TokenName?)?
+  private static boolean Token_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_1")) return false;
+    Token_1_0(b, l + 1);
+    return true;
+  }
+
+  // T_SPACES (Namespace T_COLON)? TokenName?
+  private static boolean Token_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_SPACES);
+    r = r && Token_1_0_1(b, l + 1);
+    r = r && Token_1_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // (Namespace T_COLON)?
-  private static boolean Token_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Token_2")) return false;
-    Token_2_0(b, l + 1);
+  private static boolean Token_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_1_0_1")) return false;
+    Token_1_0_1_0(b, l + 1);
     return true;
   }
 
   // Namespace T_COLON
-  private static boolean Token_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Token_2_0")) return false;
+  private static boolean Token_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_1_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = Namespace(b, l + 1);
@@ -531,21 +631,58 @@ public class PpParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // TokenName?
+  private static boolean Token_1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_1_0_2")) return false;
+    TokenName(b, l + 1);
+    return true;
+  }
+
+  // (T_SPACES RegExp)?
+  private static boolean Token_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_2")) return false;
+    Token_2_0(b, l + 1);
+    return true;
+  }
+
+  // T_SPACES RegExp
+  private static boolean Token_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_SPACES);
+    r = r && RegExp(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // (T_SPACES SwitchNamespace)?
-  private static boolean Token_6(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Token_6")) return false;
-    Token_6_0(b, l + 1);
+  private static boolean Token_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_3")) return false;
+    Token_3_0(b, l + 1);
     return true;
   }
 
   // T_SPACES SwitchNamespace
-  private static boolean Token_6_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Token_6_0")) return false;
+  private static boolean Token_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Token_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, T_SPACES);
     r = r && SwitchNamespace(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // T_NAME
+  public static boolean TokenCall(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TokenCall")) return false;
+    if (!nextTokenIs(b, T_NAME)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_NAME);
+    exit_section_(b, m, TOKEN_CALL, r);
     return r;
   }
 

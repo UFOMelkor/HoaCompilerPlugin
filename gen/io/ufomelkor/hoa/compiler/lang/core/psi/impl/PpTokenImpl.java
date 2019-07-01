@@ -8,11 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.ufomelkor.hoa.compiler.lang.core.psi.PpTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.*;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpPsiImplUtil;
 
-public class PpTokenImpl extends ASTWrapperPsiElement implements PpToken {
+public class PpTokenImpl extends PpNamedElementImpl implements PpToken {
 
   public PpTokenImpl(@NotNull ASTNode node) {
     super(node);
@@ -34,9 +33,9 @@ public class PpTokenImpl extends ASTWrapperPsiElement implements PpToken {
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PpRegExp getRegExp() {
-    return findNotNullChildByClass(PpRegExp.class);
+    return findChildByClass(PpRegExp.class);
   }
 
   @Override
@@ -46,15 +45,9 @@ public class PpTokenImpl extends ASTWrapperPsiElement implements PpToken {
   }
 
   @Override
-  @NotNull
-  public PpTokenName getTokenName() {
-    return findNotNullChildByClass(PpTokenName.class);
-  }
-
-  @Override
   @Nullable
-  public String getName() {
-    return PpPsiImplUtil.getName(this);
+  public PpTokenName getTokenName() {
+    return findChildByClass(PpTokenName.class);
   }
 
   @Override
@@ -67,6 +60,24 @@ public class PpTokenImpl extends ASTWrapperPsiElement implements PpToken {
   @Nullable
   public String getNextNamespace() {
     return PpPsiImplUtil.getNextNamespace(this);
+  }
+
+  @Override
+  @Nullable
+  public String getName() {
+    return PpPsiImplUtil.getName(this);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement setName(@NotNull String newName) {
+    return PpPsiImplUtil.setName(this, newName);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return PpPsiImplUtil.getNameIdentifier(this);
   }
 
 }

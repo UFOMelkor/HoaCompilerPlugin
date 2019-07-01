@@ -8,6 +8,9 @@ import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 
 public interface PpKept extends PpElement {
 
+  @NotNull
+  PpTokenCall getTokenCall();
+
   @Nullable
   PpUnification getUnification();
 

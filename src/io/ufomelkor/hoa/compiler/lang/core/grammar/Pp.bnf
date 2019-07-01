@@ -48,15 +48,19 @@
 File ::= (Comment|Skip|Token|Rule)* // Skip|Token|Choice
 Comment ::= T_COMMENT
 
-Skip ::= T_SKIP T_SPACES (Namespace T_COLON)? SkipName T_SPACES RegExp {methods=[getName, getCurrentNamespace]}
+Skip ::= T_SKIP (T_SPACES (Namespace T_COLON)? SkipName?)? (T_SPACES RegExp)? {methods=[getName getCurrentNamespace]}
 Namespace ::= T_NAME
 SkipName ::= T_NAME
 RegExp ::= T_REGEXP+
-Token ::= T_TOKEN T_SPACES (Namespace T_COLON)? TokenName T_SPACES RegExp (T_SPACES SwitchNamespace)? {methods=[getName, getCurrentNamespace, getNextNamespace]}
+Token ::= T_TOKEN (T_SPACES (Namespace T_COLON)? TokenName?)? (T_SPACES RegExp)? (T_SPACES SwitchNamespace)? {
+    mixin="io.ufomelkor.hoa.compiler.lang.core.psi.impl.PpNamedElementImpl"
+    implements="io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement"
+    methods=[getCurrentNamespace getNextNamespace getName setName getNameIdentifier]
+}
 TokenName ::= T_NAME
-SwitchNamespace ::= T_SWITCH_NAMESPACE T_SPACES T_NAME
+SwitchNamespace ::= T_SWITCH_NAMESPACE (T_SPACES T_NAME?)?
 
-Rule ::= (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode, getName]}
+Rule ::= (RuleName|NodeRuleName) T_COLON Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode getName]}
 RuleName ::= T_RULE_NAME
 NodeRuleName ::= T_HASH T_RULE_NAME
 Choice ::= (Concatenation|Repetition|Simple) (T_OR (Concatenation|Repetition|Simple))+
@@ -66,9 +70,11 @@ TreeNode ::= T_HASH T_NAME
 
 Simple ::= (Capturing | Skipped | Kept | Named) TreeNode? Comment?
 Capturing ::= T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END
-Skipped ::= T_SKIPPED T_NAME Unification? T_SKIPPED
-Kept ::= T_KEPT_BEGIN T_NAME Unification? T_KEPT_END
-Named ::= T_NAME T_NAMED
+Skipped ::= T_SKIPPED TokenCall Unification? T_SKIPPED
+Kept ::= T_KEPT_BEGIN TokenCall Unification? T_KEPT_END
+Named ::= RuleCall T_NAMED
+RuleCall ::= T_NAME
+TokenCall ::= T_NAME
 
 Unification ::= T_UNIFICATION_BEGIN T_UNIFICATION T_UNIFICATION_END
 Quantifier ::= T_ZERO_OR_ONE

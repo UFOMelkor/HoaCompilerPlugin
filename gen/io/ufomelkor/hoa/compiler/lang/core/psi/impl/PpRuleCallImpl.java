@@ -12,49 +12,19 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.*;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpPsiImplUtil;
 
-public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
+public class PpRuleCallImpl extends ASTWrapperPsiElement implements PpRuleCall {
 
-  public PpSkipImpl(@NotNull ASTNode node) {
+  public PpRuleCallImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PpVisitor visitor) {
-    visitor.visitSkip(this);
+    visitor.visitRuleCall(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PpVisitor) accept((PpVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PpNamespace getNamespace() {
-    return findChildByClass(PpNamespace.class);
-  }
-
-  @Override
-  @Nullable
-  public PpRegExp getRegExp() {
-    return findChildByClass(PpRegExp.class);
-  }
-
-  @Override
-  @Nullable
-  public PpSkipName getSkipName() {
-    return findChildByClass(PpSkipName.class);
-  }
-
-  @Override
-  @Nullable
-  public String getName() {
-    return PpPsiImplUtil.getName(this);
-  }
-
-  @Override
-  @NotNull
-  public String getCurrentNamespace() {
-    return PpPsiImplUtil.getCurrentNamespace(this);
   }
 
 }

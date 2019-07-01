@@ -60,7 +60,7 @@ class PpSyntaxHighlighter : SyntaxHighlighterBase() {
         private val EMPTY_KEYS = arrayOf<TextAttributesKey>()
     }
 
-    override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
+    override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
         return when(tokenType) {
             PpTypes.T_COMMENT -> COMMENT_KEYS
             PpTypes.T_COLON -> COLON_KEYS

@@ -100,8 +100,36 @@ class PpParsingTest : ParsingTestCase("", "pp", PpParserDefinition()) {
         doTest(true)
     }
 
+    fun testESwitchNamespaceMissingName() {
+        doTest(true)
+    }
+
+    fun testETokenKeyword() {
+        doTest(true)
+    }
+
+    fun testETokenName() {
+        doTest(true)
+    }
+
+    fun testETokenNamespace() {
+        doTest(true)
+    }
+
+    fun testESkipKeyword() {
+        doTest(true)
+    }
+
+    fun testESkipName() {
+        doTest(true)
+    }
+
+    fun testESkipNamespace() {
+        doTest(true)
+    }
+
     override fun getTestDataPath(): String {
-        return "testData"
+        return "testData/parsing"
     }
 
     override fun skipSpaces(): Boolean {

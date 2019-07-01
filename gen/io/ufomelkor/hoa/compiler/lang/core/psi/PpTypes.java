@@ -20,6 +20,7 @@ public interface PpTypes {
   IElementType REG_EXP = new PpElementType("REG_EXP");
   IElementType REPETITION = new PpElementType("REPETITION");
   IElementType RULE = new PpElementType("RULE");
+  IElementType RULE_CALL = new PpElementType("RULE_CALL");
   IElementType RULE_NAME = new PpElementType("RULE_NAME");
   IElementType SIMPLE = new PpElementType("SIMPLE");
   IElementType SKIP = new PpElementType("SKIP");
@@ -27,6 +28,7 @@ public interface PpTypes {
   IElementType SKIP_NAME = new PpElementType("SKIP_NAME");
   IElementType SWITCH_NAMESPACE = new PpElementType("SWITCH_NAMESPACE");
   IElementType TOKEN = new PpElementType("TOKEN");
+  IElementType TOKEN_CALL = new PpElementType("TOKEN_CALL");
   IElementType TOKEN_NAME = new PpElementType("TOKEN_NAME");
   IElementType TREE_NODE = new PpElementType("TREE_NODE");
   IElementType UNIFICATION = new PpElementType("UNIFICATION");
@@ -98,6 +100,9 @@ public interface PpTypes {
       else if (type == RULE) {
         return new PpRuleImpl(node);
       }
+      else if (type == RULE_CALL) {
+        return new PpRuleCallImpl(node);
+      }
       else if (type == RULE_NAME) {
         return new PpRuleNameImpl(node);
       }
@@ -118,6 +123,9 @@ public interface PpTypes {
       }
       else if (type == TOKEN) {
         return new PpTokenImpl(node);
+      }
+      else if (type == TOKEN_CALL) {
+        return new PpTokenCallImpl(node);
       }
       else if (type == TOKEN_NAME) {
         return new PpTokenNameImpl(node);

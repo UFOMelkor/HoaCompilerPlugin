@@ -6,9 +6,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 
-public interface PpSwitchNamespace extends PpElement {
-
-  @Nullable
-  PsiElement getTSpaces();
+public interface PpTokenCall extends PpElement {
 
 }
