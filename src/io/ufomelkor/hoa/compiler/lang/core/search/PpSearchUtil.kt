@@ -7,6 +7,7 @@ import com.intellij.psi.search.GlobalSearchScope
 import io.ufomelkor.hoa.compiler.plugin.psi.PpFile
 import com.intellij.psi.util.PsiTreeUtil
 import io.ufomelkor.hoa.compiler.lang.PpFileType
+import io.ufomelkor.hoa.compiler.lang.core.psi.PpRule
 import io.ufomelkor.hoa.compiler.lang.core.psi.PpToken
 
 
@@ -35,10 +36,19 @@ object PpSearchUtil {
     fun findTokens(file: PpFile, name: String): List<PpToken> = findTokens(file).filter { it.name == name }
 
     @JvmStatic
-    fun findTokens(file: PpFile): List<PpToken> {
-        return PsiTreeUtil.getChildrenOfType(file, PpToken::class.java)
+    fun findTokens(file: PpFile): List<PpToken>
+        = PsiTreeUtil.getChildrenOfType(file, PpToken::class.java)
             .orEmpty()
             .filterNotNull()
             .toList()
-    }
+
+    @JvmStatic
+    fun findRules(file: PpFile, name: String): List<PpRule> = findRules(file).filter { it.name == name }
+
+    @JvmStatic
+    fun findRules(file: PpFile): List<PpRule>
+        = PsiTreeUtil.getChildrenOfType(file, PpRule::class.java)
+        .orEmpty()
+        .filterNotNull()
+        .toList()
 }
