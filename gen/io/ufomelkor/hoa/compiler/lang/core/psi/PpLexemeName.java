@@ -6,6 +6,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 
-public interface PpTokenName extends PpElement {
+public interface PpLexemeName extends PpElement {
 
 }

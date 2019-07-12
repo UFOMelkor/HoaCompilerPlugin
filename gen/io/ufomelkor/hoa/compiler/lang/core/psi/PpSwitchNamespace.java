@@ -9,6 +9,9 @@ import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 public interface PpSwitchNamespace extends PpElement {
 
   @Nullable
+  PpNamespaceCall getNamespaceCall();
+
+  @Nullable
   PsiElement getTSpaces();
 
 }

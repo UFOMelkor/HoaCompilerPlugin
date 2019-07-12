@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.*;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpPsiImplUtil;
 
-public class PpSkipNameImpl extends ASTWrapperPsiElement implements PpSkipName {
+public class PpNamespaceCallImpl extends ASTWrapperPsiElement implements PpNamespaceCall {
 
-  public PpSkipNameImpl(@NotNull ASTNode node) {
+  public PpNamespaceCallImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PpVisitor visitor) {
-    visitor.visitSkipName(this);
+    visitor.visitNamespaceCall(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

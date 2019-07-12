@@ -28,6 +28,12 @@ public class PpTokenImpl extends PpNamedElementImpl implements PpToken {
 
   @Override
   @Nullable
+  public PpLexemeName getLexemeName() {
+    return findChildByClass(PpLexemeName.class);
+  }
+
+  @Override
+  @Nullable
   public PpNamespace getNamespace() {
     return findChildByClass(PpNamespace.class);
   }
@@ -46,20 +52,8 @@ public class PpTokenImpl extends PpNamedElementImpl implements PpToken {
 
   @Override
   @Nullable
-  public PpTokenName getTokenName() {
-    return findChildByClass(PpTokenName.class);
-  }
-
-  @Override
-  @Nullable
   public String getCurrentNamespace() {
     return PpPsiImplUtil.getCurrentNamespace(this);
-  }
-
-  @Override
-  @Nullable
-  public String getNextNamespace() {
-    return PpPsiImplUtil.getNextNamespace(this);
   }
 
   @Override
@@ -78,6 +72,12 @@ public class PpTokenImpl extends PpNamedElementImpl implements PpToken {
   @Nullable
   public PsiElement getNameIdentifier() {
     return PpPsiImplUtil.getNameIdentifier(this);
+  }
+
+  @Override
+  @Nullable
+  public String getNextNamespace() {
+    return PpPsiImplUtil.getNextNamespace(this);
   }
 
 }

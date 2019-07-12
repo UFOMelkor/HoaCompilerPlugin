@@ -4,9 +4,12 @@ package io.ufomelkor.hoa.compiler.lang.core.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement;
+import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpLexeme;
 
-public interface PpToken extends PpNamedElement {
+public interface PpToken extends PpLexeme {
+
+  @Nullable
+  PpLexemeName getLexemeName();
 
   @Nullable
   PpNamespace getNamespace();
@@ -18,13 +21,7 @@ public interface PpToken extends PpNamedElement {
   PpSwitchNamespace getSwitchNamespace();
 
   @Nullable
-  PpTokenName getTokenName();
-
-  @Nullable
   String getCurrentNamespace();
-
-  @Nullable
-  String getNextNamespace();
 
   @Nullable
   String getName();
@@ -34,5 +31,8 @@ public interface PpToken extends PpNamedElement {
 
   @Nullable
   PsiElement getNameIdentifier();
+
+  @Nullable
+  String getNextNamespace();
 
 }

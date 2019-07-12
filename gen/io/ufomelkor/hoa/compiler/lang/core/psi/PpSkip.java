@@ -4,9 +4,12 @@ package io.ufomelkor.hoa.compiler.lang.core.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
+import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpLexeme;
 
-public interface PpSkip extends PpElement {
+public interface PpSkip extends PpLexeme {
+
+  @Nullable
+  PpLexemeName getLexemeName();
 
   @Nullable
   PpNamespace getNamespace();
@@ -14,13 +17,16 @@ public interface PpSkip extends PpElement {
   @Nullable
   PpRegExp getRegExp();
 
-  @Nullable
-  PpSkipName getSkipName();
+  @NotNull
+  String getCurrentNamespace();
 
   @Nullable
   String getName();
 
   @NotNull
-  String getCurrentNamespace();
+  PsiElement setName(@NotNull String newName);
+
+  @Nullable
+  PsiElement getNameIdentifier();
 
 }

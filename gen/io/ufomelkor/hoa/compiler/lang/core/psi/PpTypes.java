@@ -13,8 +13,10 @@ public interface PpTypes {
   IElementType COMMENT = new PpElementType("COMMENT");
   IElementType CONCATENATION = new PpElementType("CONCATENATION");
   IElementType KEPT = new PpElementType("KEPT");
+  IElementType LEXEME_NAME = new PpElementType("LEXEME_NAME");
   IElementType NAMED = new PpElementType("NAMED");
   IElementType NAMESPACE = new PpElementType("NAMESPACE");
+  IElementType NAMESPACE_CALL = new PpElementType("NAMESPACE_CALL");
   IElementType NODE_RULE_NAME = new PpElementType("NODE_RULE_NAME");
   IElementType QUANTIFIER = new PpElementType("QUANTIFIER");
   IElementType REG_EXP = new PpElementType("REG_EXP");
@@ -25,11 +27,9 @@ public interface PpTypes {
   IElementType SIMPLE = new PpElementType("SIMPLE");
   IElementType SKIP = new PpElementType("SKIP");
   IElementType SKIPPED = new PpElementType("SKIPPED");
-  IElementType SKIP_NAME = new PpElementType("SKIP_NAME");
   IElementType SWITCH_NAMESPACE = new PpElementType("SWITCH_NAMESPACE");
   IElementType TOKEN = new PpElementType("TOKEN");
   IElementType TOKEN_CALL = new PpElementType("TOKEN_CALL");
-  IElementType TOKEN_NAME = new PpElementType("TOKEN_NAME");
   IElementType TREE_NODE = new PpElementType("TREE_NODE");
   IElementType UNIFICATION = new PpElementType("UNIFICATION");
 
@@ -79,11 +79,17 @@ public interface PpTypes {
       else if (type == KEPT) {
         return new PpKeptImpl(node);
       }
+      else if (type == LEXEME_NAME) {
+        return new PpLexemeNameImpl(node);
+      }
       else if (type == NAMED) {
         return new PpNamedImpl(node);
       }
       else if (type == NAMESPACE) {
         return new PpNamespaceImpl(node);
+      }
+      else if (type == NAMESPACE_CALL) {
+        return new PpNamespaceCallImpl(node);
       }
       else if (type == NODE_RULE_NAME) {
         return new PpNodeRuleNameImpl(node);
@@ -115,9 +121,6 @@ public interface PpTypes {
       else if (type == SKIPPED) {
         return new PpSkippedImpl(node);
       }
-      else if (type == SKIP_NAME) {
-        return new PpSkipNameImpl(node);
-      }
       else if (type == SWITCH_NAMESPACE) {
         return new PpSwitchNamespaceImpl(node);
       }
@@ -126,9 +129,6 @@ public interface PpTypes {
       }
       else if (type == TOKEN_CALL) {
         return new PpTokenCallImpl(node);
-      }
-      else if (type == TOKEN_NAME) {
-        return new PpTokenNameImpl(node);
       }
       else if (type == TREE_NODE) {
         return new PpTreeNodeImpl(node);

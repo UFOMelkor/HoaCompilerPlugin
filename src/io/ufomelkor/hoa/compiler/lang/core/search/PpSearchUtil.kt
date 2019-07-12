@@ -10,7 +10,6 @@ import io.ufomelkor.hoa.compiler.lang.PpFileType
 import io.ufomelkor.hoa.compiler.lang.core.psi.PpRule
 import io.ufomelkor.hoa.compiler.lang.core.psi.PpToken
 
-
 object PpSearchUtil {
     @JvmStatic
     fun findTokens(project: Project, name: String): List<PpToken> {

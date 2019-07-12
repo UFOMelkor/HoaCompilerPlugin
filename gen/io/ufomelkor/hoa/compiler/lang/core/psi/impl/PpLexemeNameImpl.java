@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.*;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpPsiImplUtil;
 
-public class PpTokenNameImpl extends ASTWrapperPsiElement implements PpTokenName {
+public class PpLexemeNameImpl extends ASTWrapperPsiElement implements PpLexemeName {
 
-  public PpTokenNameImpl(@NotNull ASTNode node) {
+  public PpLexemeNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PpVisitor visitor) {
-    visitor.visitTokenName(this);
+    visitor.visitLexemeName(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {

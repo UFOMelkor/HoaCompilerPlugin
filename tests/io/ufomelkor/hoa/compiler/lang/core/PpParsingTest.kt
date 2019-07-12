@@ -58,6 +58,8 @@ class PpParsingTest : ParsingTestCase("", "pp", PpParserDefinition()) {
 
     fun testETokenName() = doTest(true)
 
+    fun testETokenColonName() = doTest(true)
+
     fun testETokenNamespace() = doTest(true)
 
     fun testESkipKeyword() = doTest(true)
@@ -79,6 +81,8 @@ class PpParsingTest : ParsingTestCase("", "pp", PpParserDefinition()) {
     fun testERuleStartingPipe() = doTest(true)
 
     fun testERuleTrailingPipe() = doTest(true)
+
+    fun testERuleEmpty() = doTest(true)
 
     override fun getTestDataPath(): String {
         return "testData/parsing"

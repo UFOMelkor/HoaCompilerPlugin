@@ -17,11 +17,11 @@ object PpPsiImplUtil {
 
     @JvmStatic
     fun getName(element: PpToken): String?
-        = element.node?.findChildByType(PpTypes.TOKEN_NAME)?.findChildByType(PpTypes.T_NAME)?.text
+        = element.node?.findChildByType(PpTypes.LEXEME_NAME)?.findChildByType(PpTypes.T_NAME)?.text
 
     @JvmStatic
     fun getName(element: PpSkip): String?
-        = element.node?.findChildByType(PpTypes.SKIP_NAME)?.findChildByType(PpTypes.T_NAME)?.text
+        = element.node?.findChildByType(PpTypes.LEXEME_NAME)?.findChildByType(PpTypes.T_NAME)?.text
 
     @JvmStatic
     fun getCurrentNamespace(element: PpSkip): String
@@ -33,11 +33,16 @@ object PpPsiImplUtil {
 
     @JvmStatic
     fun getNextNamespace(element: PpToken): String?
-        = element.node?.findChildByType(PpTypes.SWITCH_NAMESPACE)?.findChildByType(PpTypes.T_NAME)?.text ?: getCurrentNamespace(element)
+        = element.node
+            ?.findChildByType(PpTypes.SWITCH_NAMESPACE)
+            ?.findChildByType(PpTypes.NAMESPACE_CALL)
+            ?.findChildByType(PpTypes.T_NAME)
+            ?.text
+            ?: getCurrentNamespace(element)
 
     @JvmStatic
     fun setName(element: PpToken, newName: String): PsiElement {
-        val nameNode = element.node.findChildByType(PpTypes.TOKEN_NAME)
+        val nameNode = element.node.findChildByType(PpTypes.LEXEME_NAME)
         if (nameNode != null) {
             val newNameNode = PpElementFactory.createTokenName(element.project, newName).firstChild.node
             element.node.replaceChild(nameNode, newNameNode)
@@ -46,5 +51,15 @@ object PpPsiImplUtil {
     }
 
     @JvmStatic
-    fun getNameIdentifier(element: PpToken) = element.node?.findChildByType(PpTypes.TOKEN_NAME)?.psi
+    fun setName(element: PpSkip, newName: String): PsiElement {
+        val nameNode = element.node.findChildByType(PpTypes.LEXEME_NAME)
+        if (nameNode != null) {
+            val newNameNode = PpElementFactory.createSkipName(element.project, newName).firstChild.node
+            element.node.replaceChild(nameNode, newNameNode)
+        }
+        return element
+    }
+
+    @JvmStatic
+    fun getNameIdentifier(element: PpLexeme) = element.node?.findChildByType(PpTypes.LEXEME_NAME)?.psi
 }

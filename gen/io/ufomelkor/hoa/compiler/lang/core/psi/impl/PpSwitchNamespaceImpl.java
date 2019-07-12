@@ -29,6 +29,12 @@ public class PpSwitchNamespaceImpl extends ASTWrapperPsiElement implements PpSwi
 
   @Override
   @Nullable
+  public PpNamespaceCall getNamespaceCall() {
+    return findChildByClass(PpNamespaceCall.class);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getTSpaces() {
     return findChildByType(T_SPACES);
   }

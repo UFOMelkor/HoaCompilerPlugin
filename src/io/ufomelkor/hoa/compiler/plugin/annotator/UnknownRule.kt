@@ -1,4 +1,4 @@
-package io.ufomelkor.hoa.compiler.plugin.annotation
+package io.ufomelkor.hoa.compiler.plugin.annotator
 
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator

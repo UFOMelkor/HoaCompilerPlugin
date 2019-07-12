@@ -11,8 +11,11 @@ class HighlightTokens : Annotator {
         }
 
         val key = when(element.node.treeParent.elementType) {
-            PpTypes.TOKEN_NAME -> PpSyntaxHighlighter.TOKEN_NAME
-            PpTypes.SKIP_NAME -> PpSyntaxHighlighter.SKIP_NAME
+            PpTypes.LEXEME_NAME -> when(element.node.treeParent.treeParent.elementType) {
+                PpTypes.SKIP -> PpSyntaxHighlighter.SKIP_NAME
+                PpTypes.TOKEN -> PpSyntaxHighlighter.TOKEN_NAME
+                else -> null
+            }
             PpTypes.SKIPPED -> PpSyntaxHighlighter.SKIPPED_TOKEN
             PpTypes.KEPT -> PpSyntaxHighlighter.KEPT_TOKEN
             else -> null

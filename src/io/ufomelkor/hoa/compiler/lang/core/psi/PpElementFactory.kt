@@ -11,11 +11,16 @@ object PpElementFactory {
         = (PsiFileFactory.getInstance(project).createFileFromText("dummy.pp", PpFileType.INSTANCE, text) as PpFile)
 
     @JvmStatic
-    fun createTokenName(project: Project, name: String): PpTokenName {
+    fun createTokenName(project: Project, name: String): PpLexemeName {
         val file = createFile(project, "%token $name")
-        return file.lastChild as PpTokenName
+        return file.lastChild as PpLexemeName
     }
 
+    @JvmStatic
+    fun createSkipName(project: Project, name: String): PpLexemeName {
+        val file = createFile(project, "%skip $name")
+        return file.lastChild as PpLexemeName
+    }
 
     @JvmStatic
     fun createComma(project: Project, text: String): PpComment

@@ -64,6 +64,7 @@ T_UNIFICATION_END = "]"
     {T_TOKEN}               { vSpaces = 0; yybegin(LEXEME); return T_TOKEN; }
     {T_SWITCH_NAMESPACE}    { vSpaces = 0; return T_SWITCH_NAMESPACE; }
     ^{T_NAME}               { yybegin(RULE); return T_RULE_NAME; }
+    [^]                     { return BAD_CHARACTER; }
 }
 
 <LEXEME> {
@@ -74,6 +75,7 @@ T_UNIFICATION_END = "]"
     {T_NUMBER} { return T_REGEXP; }
     {T_REGEXP} { if (yytext().equals("->")) { vSpaces = 0; return T_SWITCH_NAMESPACE;} return T_REGEXP; }
     \R         { yybegin(YYINITIAL); return WHITE_SPACE; }
+    [^]        { return BAD_CHARACTER; }
 }
 
 <RULE> {
@@ -102,9 +104,11 @@ T_UNIFICATION_END = "]"
     {T_UNIFICATION_BEGIN}   { return T_UNIFICATION_BEGIN; }
     {T_UNIFICATION}         { return T_UNIFICATION; }
     {T_UNIFICATION_END}     { return T_UNIFICATION_END; }
+    [^]                     { return BAD_CHARACTER; }
 }
 
 <RULE_NAME> {
     {T_NAME}    { yybegin(RULE); return T_RULE_NAME; }
     {T_COLON}   { yybegin(RULE); return T_COLON; }
+    [^]         { return BAD_CHARACTER; }
 }

@@ -1,6 +1,5 @@
 package io.ufomelkor.hoa.compiler.plugin.highlight
 
-
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.*
 import com.intellij.openapi.editor.colors.TextAttributesKey
@@ -89,7 +88,5 @@ class PpSyntaxHighlighter : SyntaxHighlighterBase() {
         }
     }
 
-    override fun getHighlightingLexer(): Lexer {
-        return PpLexerAdapter()
-    }
+    override fun getHighlightingLexer(): Lexer = PpLexerAdapter()
 }

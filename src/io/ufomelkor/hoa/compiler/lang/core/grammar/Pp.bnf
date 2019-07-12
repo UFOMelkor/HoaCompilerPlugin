@@ -48,17 +48,21 @@
 File ::= (Comment|Skip|Token|Rule)* // Skip|Token|Choice
 Comment ::= T_COMMENT
 
-Skip ::= T_SKIP (T_SPACES (Namespace T_COLON)? SkipName?)? (T_SPACES RegExp)? {methods=[getName getCurrentNamespace]}
-Namespace ::= T_NAME
-SkipName ::= T_NAME
-RegExp ::= T_REGEXP+
-Token ::= T_TOKEN (T_SPACES (Namespace T_COLON)? TokenName?)? (T_SPACES RegExp)? (T_SPACES SwitchNamespace)? {
+Skip ::= T_SKIP (T_SPACES (Namespace T_COLON)? LexemeName?)? (T_SPACES RegExp)? {
     mixin="io.ufomelkor.hoa.compiler.lang.core.psi.impl.PpNamedElementImpl"
-    implements="io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement"
-    methods=[getCurrentNamespace getNextNamespace getName setName getNameIdentifier]
+    implements="io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpLexeme"
+    methods=[getCurrentNamespace getName setName getNameIdentifier]
 }
-TokenName ::= T_NAME
-SwitchNamespace ::= T_SWITCH_NAMESPACE (T_SPACES T_NAME?)?
+Namespace ::= T_NAME
+LexemeName ::= T_NAME
+RegExp ::= T_REGEXP+
+Token ::= T_TOKEN (T_SPACES (Namespace T_COLON|T_COLON)? LexemeName?)? (T_SPACES RegExp)? (T_SPACES SwitchNamespace)? {
+    mixin="io.ufomelkor.hoa.compiler.lang.core.psi.impl.PpNamedElementImpl"
+    implements="io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpLexeme"
+    methods=[getCurrentNamespace getName setName getNameIdentifier getNextNamespace]
+}
+SwitchNamespace ::= T_SWITCH_NAMESPACE T_SPACES? NamespaceCall?
+NamespaceCall ::= T_NAME
 
 Rule ::= (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode getName]}
 RuleName ::= T_RULE_NAME

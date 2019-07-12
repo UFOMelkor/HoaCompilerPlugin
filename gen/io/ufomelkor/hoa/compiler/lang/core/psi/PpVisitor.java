@@ -4,7 +4,7 @@ package io.ufomelkor.hoa.compiler.lang.core.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
-import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpNamedElement;
+import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpLexeme;
 
 public class PpVisitor extends PsiElementVisitor {
 
@@ -28,11 +28,19 @@ public class PpVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitLexemeName(@NotNull PpLexemeName o) {
+    visitElement(o);
+  }
+
   public void visitNamed(@NotNull PpNamed o) {
     visitElement(o);
   }
 
   public void visitNamespace(@NotNull PpNamespace o) {
+    visitElement(o);
+  }
+
+  public void visitNamespaceCall(@NotNull PpNamespaceCall o) {
     visitElement(o);
   }
 
@@ -69,11 +77,7 @@ public class PpVisitor extends PsiElementVisitor {
   }
 
   public void visitSkip(@NotNull PpSkip o) {
-    visitElement(o);
-  }
-
-  public void visitSkipName(@NotNull PpSkipName o) {
-    visitElement(o);
+    visitLexeme(o);
   }
 
   public void visitSkipped(@NotNull PpSkipped o) {
@@ -85,14 +89,10 @@ public class PpVisitor extends PsiElementVisitor {
   }
 
   public void visitToken(@NotNull PpToken o) {
-    visitNamedElement(o);
+    visitLexeme(o);
   }
 
   public void visitTokenCall(@NotNull PpTokenCall o) {
-    visitElement(o);
-  }
-
-  public void visitTokenName(@NotNull PpTokenName o) {
     visitElement(o);
   }
 
@@ -104,7 +104,7 @@ public class PpVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
-  public void visitNamedElement(@NotNull PpNamedElement o) {
+  public void visitLexeme(@NotNull PpLexeme o) {
     visitElement(o);
   }
 

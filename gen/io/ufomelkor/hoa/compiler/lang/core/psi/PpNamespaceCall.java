@@ -6,6 +6,6 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpElement;
 
-public interface PpSkipName extends PpElement {
+public interface PpNamespaceCall extends PpElement {
 
 }

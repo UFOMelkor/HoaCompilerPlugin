@@ -8,11 +8,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static io.ufomelkor.hoa.compiler.lang.core.psi.PpTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.ufomelkor.hoa.compiler.lang.core.psi.*;
 import io.ufomelkor.hoa.compiler.lang.core.psi.ext.PpPsiImplUtil;
 
-public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
+public class PpSkipImpl extends PpNamedElementImpl implements PpSkip {
 
   public PpSkipImpl(@NotNull ASTNode node) {
     super(node);
@@ -29,6 +28,12 @@ public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
 
   @Override
   @Nullable
+  public PpLexemeName getLexemeName() {
+    return findChildByClass(PpLexemeName.class);
+  }
+
+  @Override
+  @Nullable
   public PpNamespace getNamespace() {
     return findChildByClass(PpNamespace.class);
   }
@@ -40,9 +45,9 @@ public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
   }
 
   @Override
-  @Nullable
-  public PpSkipName getSkipName() {
-    return findChildByClass(PpSkipName.class);
+  @NotNull
+  public String getCurrentNamespace() {
+    return PpPsiImplUtil.getCurrentNamespace(this);
   }
 
   @Override
@@ -53,8 +58,14 @@ public class PpSkipImpl extends ASTWrapperPsiElement implements PpSkip {
 
   @Override
   @NotNull
-  public String getCurrentNamespace() {
-    return PpPsiImplUtil.getCurrentNamespace(this);
+  public PsiElement setName(@NotNull String newName) {
+    return PpPsiImplUtil.setName(this, newName);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return PpPsiImplUtil.getNameIdentifier(this);
   }
 
 }

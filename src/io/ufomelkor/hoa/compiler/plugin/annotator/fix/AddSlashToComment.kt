@@ -1,4 +1,4 @@
-package io.ufomelkor.hoa.compiler.plugin.annotation.fix
+package io.ufomelkor.hoa.compiler.plugin.annotator.fix
 
 import com.intellij.codeInspection.LocalQuickFixAndIntentionActionOnPsiElement
 import com.intellij.openapi.editor.Editor
@@ -19,5 +19,4 @@ class AddSlashToComment(expr: PsiElement) : LocalQuickFixAndIntentionActionOnPsi
 
         startElement.replace(PpElementFactory.createComma(project, startElement.text.trimStart('/')))
     }
-
 }
