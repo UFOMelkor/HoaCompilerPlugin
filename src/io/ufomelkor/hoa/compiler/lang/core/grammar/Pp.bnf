@@ -64,19 +64,20 @@ Token ::= T_TOKEN (T_SPACES (Namespace T_COLON|T_COLON)? LexemeName?)? (T_SPACES
 SwitchNamespace ::= T_SWITCH_NAMESPACE T_SPACES? NamespaceCall?
 NamespaceCall ::= T_NAME
 
-Rule ::= (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple) {methods=[isNode getName]}
+Rule ::= (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple)? {methods=[isNode getName]}
 RuleName ::= T_RULE_NAME
-NodeRuleName ::= T_HASH T_RULE_NAME
-Choice ::= (Concatenation|Repetition|Simple) (T_OR (Concatenation|Repetition|Simple))+
+NodeRuleName ::= T_HASH_LINE_START T_RULE_NAME?
+Choice ::= T_OR? (Concatenation|Repetition|Simple) (T_OR+ (Concatenation|Repetition|Simple))+ T_OR?
 Concatenation ::= (Repetition|Simple) (Repetition|Simple)+ TreeNode?
 Repetition ::= Simple Quantifier
-TreeNode ::= T_HASH T_NAME
+TreeNode ::= T_HASH T_NAME?
 
 Simple ::= (Capturing | Skipped | Kept | Named) TreeNode? Comment?
-Capturing ::= T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END
+Capturing ::= (T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END?)
+    | T_CAPTURING_BEGIN
 Skipped ::= T_SKIPPED TokenCall Unification? T_SKIPPED
 Kept ::= T_KEPT_BEGIN TokenCall Unification? T_KEPT_END
-Named ::= RuleCall T_NAMED
+Named ::= RuleCall T_NAMED?
 RuleCall ::= T_NAME
 TokenCall ::= T_NAME
 

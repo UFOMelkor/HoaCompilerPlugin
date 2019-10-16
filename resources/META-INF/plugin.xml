@@ -35,10 +35,9 @@
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.MissingSlashAtCommentStart" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.RedundantDefaultNamespace" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.RedundantNamespaceSwitch" />
-        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.IncompleteNamespaceSwitch" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.UnknownToken" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.UnknownRule" />
-        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.RuleMissesColon" />
+        <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.EnsureCompleteRule" />
         <annotator language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.annotator.EnsureCompleteLexemes" />
         <lang.psiStructureViewFactory language="PP" implementationClass="io.ufomelkor.hoa.compiler.plugin.structure.PpStructureViewFactory"/>
         <completion.contributor language="PP" implementationClass="io.ufomelkor.hoa.compiler.lang.core.completion.CompleteKeywords"/>

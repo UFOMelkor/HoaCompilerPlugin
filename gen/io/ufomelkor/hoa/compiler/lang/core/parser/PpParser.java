@@ -38,23 +38,35 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END
+  // (T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END?)
+  //     | T_CAPTURING_BEGIN
   public static boolean Capturing(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Capturing")) return false;
     if (!nextTokenIs(b, T_CAPTURING_BEGIN)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, T_CAPTURING_BEGIN);
-    r = r && Capturing_1(b, l + 1);
-    r = r && Capturing_2(b, l + 1);
-    r = r && consumeToken(b, T_CAPTURING_END);
+    r = Capturing_0(b, l + 1);
+    if (!r) r = consumeToken(b, T_CAPTURING_BEGIN);
     exit_section_(b, m, CAPTURING, r);
     return r;
   }
 
+  // T_CAPTURING_BEGIN (Choice|Concatenation|Repetition|Simple) TreeNode? T_CAPTURING_END?
+  private static boolean Capturing_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Capturing_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, T_CAPTURING_BEGIN);
+    r = r && Capturing_0_1(b, l + 1);
+    r = r && Capturing_0_2(b, l + 1);
+    r = r && Capturing_0_3(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // Choice|Concatenation|Repetition|Simple
-  private static boolean Capturing_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Capturing_1")) return false;
+  private static boolean Capturing_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Capturing_0_1")) return false;
     boolean r;
     r = Choice(b, l + 1);
     if (!r) r = Concatenation(b, l + 1);
@@ -64,27 +76,43 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   // TreeNode?
-  private static boolean Capturing_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Capturing_2")) return false;
+  private static boolean Capturing_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Capturing_0_2")) return false;
     TreeNode(b, l + 1);
     return true;
   }
 
+  // T_CAPTURING_END?
+  private static boolean Capturing_0_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Capturing_0_3")) return false;
+    consumeToken(b, T_CAPTURING_END);
+    return true;
+  }
+
   /* ********************************************************** */
-  // (Concatenation|Repetition|Simple) (T_OR (Concatenation|Repetition|Simple))+
+  // T_OR? (Concatenation|Repetition|Simple) (T_OR+ (Concatenation|Repetition|Simple))+ T_OR?
   public static boolean Choice(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Choice")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CHOICE, "<choice>");
     r = Choice_0(b, l + 1);
     r = r && Choice_1(b, l + 1);
+    r = r && Choice_2(b, l + 1);
+    r = r && Choice_3(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // Concatenation|Repetition|Simple
+  // T_OR?
   private static boolean Choice_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Choice_0")) return false;
+    consumeToken(b, T_OR);
+    return true;
+  }
+
+  // Concatenation|Repetition|Simple
+  private static boolean Choice_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_1")) return false;
     boolean r;
     r = Concatenation(b, l + 1);
     if (!r) r = Repetition(b, l + 1);
@@ -92,40 +120,62 @@ public class PpParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (T_OR (Concatenation|Repetition|Simple))+
-  private static boolean Choice_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Choice_1")) return false;
+  // (T_OR+ (Concatenation|Repetition|Simple))+
+  private static boolean Choice_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_2")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Choice_1_0(b, l + 1);
+    r = Choice_2_0(b, l + 1);
     while (r) {
       int c = current_position_(b);
-      if (!Choice_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "Choice_1", c)) break;
+      if (!Choice_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "Choice_2", c)) break;
     }
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // T_OR (Concatenation|Repetition|Simple)
-  private static boolean Choice_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Choice_1_0")) return false;
+  // T_OR+ (Concatenation|Repetition|Simple)
+  private static boolean Choice_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = Choice_2_0_0(b, l + 1);
+    r = r && Choice_2_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // T_OR+
+  private static boolean Choice_2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_2_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, T_OR);
-    r = r && Choice_1_0_1(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!consumeToken(b, T_OR)) break;
+      if (!empty_element_parsed_guard_(b, "Choice_2_0_0", c)) break;
+    }
     exit_section_(b, m, null, r);
     return r;
   }
 
   // Concatenation|Repetition|Simple
-  private static boolean Choice_1_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Choice_1_0_1")) return false;
+  private static boolean Choice_2_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_2_0_1")) return false;
     boolean r;
     r = Concatenation(b, l + 1);
     if (!r) r = Repetition(b, l + 1);
     if (!r) r = Simple(b, l + 1);
     return r;
+  }
+
+  // T_OR?
+  private static boolean Choice_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Choice_3")) return false;
+    consumeToken(b, T_OR);
+    return true;
   }
 
   /* ********************************************************** */
@@ -251,16 +301,23 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // RuleCall T_NAMED
+  // RuleCall T_NAMED?
   public static boolean Named(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Named")) return false;
     if (!nextTokenIs(b, T_NAME)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = RuleCall(b, l + 1);
-    r = r && consumeToken(b, T_NAMED);
+    r = r && Named_1(b, l + 1);
     exit_section_(b, m, NAMED, r);
     return r;
+  }
+
+  // T_NAMED?
+  private static boolean Named_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Named_1")) return false;
+    consumeToken(b, T_NAMED);
+    return true;
   }
 
   /* ********************************************************** */
@@ -288,15 +345,23 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_HASH T_RULE_NAME
+  // T_HASH_LINE_START T_RULE_NAME?
   public static boolean NodeRuleName(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "NodeRuleName")) return false;
-    if (!nextTokenIs(b, T_HASH)) return false;
+    if (!nextTokenIs(b, T_HASH_LINE_START)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_HASH, T_RULE_NAME);
+    r = consumeToken(b, T_HASH_LINE_START);
+    r = r && NodeRuleName_1(b, l + 1);
     exit_section_(b, m, NODE_RULE_NAME, r);
     return r;
+  }
+
+  // T_RULE_NAME?
+  private static boolean NodeRuleName_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "NodeRuleName_1")) return false;
+    consumeToken(b, T_RULE_NAME);
+    return true;
   }
 
   /* ********************************************************** */
@@ -352,10 +417,10 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple)
+  // (RuleName|NodeRuleName) T_COLON? Comment? (Choice|Concatenation|Repetition|Simple)?
   public static boolean Rule(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Rule")) return false;
-    if (!nextTokenIs(b, "<rule>", T_HASH, T_RULE_NAME)) return false;
+    if (!nextTokenIs(b, "<rule>", T_HASH_LINE_START, T_RULE_NAME)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, RULE, "<rule>");
     r = Rule_0(b, l + 1);
@@ -389,9 +454,16 @@ public class PpParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // Choice|Concatenation|Repetition|Simple
+  // (Choice|Concatenation|Repetition|Simple)?
   private static boolean Rule_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Rule_3")) return false;
+    Rule_3_0(b, l + 1);
+    return true;
+  }
+
+  // Choice|Concatenation|Repetition|Simple
+  private static boolean Rule_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Rule_3_0")) return false;
     boolean r;
     r = Choice(b, l + 1);
     if (!r) r = Concatenation(b, l + 1);
@@ -707,15 +779,23 @@ public class PpParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // T_HASH T_NAME
+  // T_HASH T_NAME?
   public static boolean TreeNode(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TreeNode")) return false;
     if (!nextTokenIs(b, T_HASH)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, T_HASH, T_NAME);
+    r = consumeToken(b, T_HASH);
+    r = r && TreeNode_1(b, l + 1);
     exit_section_(b, m, TREE_NODE, r);
     return r;
+  }
+
+  // T_NAME?
+  private static boolean TreeNode_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TreeNode_1")) return false;
+    consumeToken(b, T_NAME);
+    return true;
   }
 
   /* ********************************************************** */

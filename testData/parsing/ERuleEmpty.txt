@@ -1,0 +1,5 @@
+PP File(0,5)
+  PpRuleImpl(RULE)(0,5)
+    PpRuleNameImpl(RULE_NAME)(0,4)
+      PsiElement(PpTokenType.T_RULE_NAME)('rule')(0,4)
+    PsiElement(PpTokenType.:)(':')(4,5)

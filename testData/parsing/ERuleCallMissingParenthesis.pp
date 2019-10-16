@@ -1,0 +1,5 @@
+value:
+    string
+
+another:
+    string()

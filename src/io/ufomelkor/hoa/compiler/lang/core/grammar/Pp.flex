@@ -64,25 +64,27 @@ T_UNIFICATION_END = "]"
     {T_TOKEN}               { vSpaces = 0; yybegin(LEXEME); return T_TOKEN; }
     {T_SWITCH_NAMESPACE}    { vSpaces = 0; return T_SWITCH_NAMESPACE; }
     ^{T_NAME}               { yybegin(RULE); return T_RULE_NAME; }
+    ^{T_HASH}               { yybegin(RULE_NAME); return T_HASH_LINE_START; }
     [^]                     { return BAD_CHARACTER; }
 }
 
 <LEXEME> {
+    ^{T_HASH}             { yybegin(RULE_NAME); return T_HASH_LINE_START; }
     {T_SWITCH_NAMESPACE}  { vSpaces = 0; return T_SWITCH_NAMESPACE; }
-    {T_SPACES} { vSpaces += 1; return T_SPACES; }
-    {T_NAME}   { return vSpaces > 1 ? T_REGEXP : T_NAME; }
-    {T_COLON}  { return vSpaces > 1 ? T_REGEXP : T_COLON; }
-    {T_NUMBER} { return T_REGEXP; }
-    {T_REGEXP} { if (yytext().equals("->")) { vSpaces = 0; return T_SWITCH_NAMESPACE;} return T_REGEXP; }
-    \R         { yybegin(YYINITIAL); return WHITE_SPACE; }
-    [^]        { return BAD_CHARACTER; }
+    {T_SPACES}            { vSpaces += 1; return T_SPACES; }
+    {T_NAME}              { return vSpaces > 1 ? T_REGEXP : T_NAME; }
+    {T_COLON}             { return vSpaces > 1 ? T_REGEXP : T_COLON; }
+    {T_NUMBER}            { return T_REGEXP; }
+    {T_REGEXP}            { if (yytext().equals("->")) { vSpaces = 0; return T_SWITCH_NAMESPACE;} return T_REGEXP; }
+    \R                    { yybegin(YYINITIAL); return WHITE_SPACE; }
+    [^]                   { return BAD_CHARACTER; }
 }
 
 <RULE> {
     {WHITE_SPACE}           { return WHITE_SPACE; }
     ^{T_NAME}               { return T_RULE_NAME; }
     {T_NAME}                { return T_NAME; }
-    ^{T_HASH}               { yybegin(RULE_NAME); return T_HASH; }
+    ^{T_HASH}               { yybegin(RULE_NAME); return T_HASH_LINE_START; }
     {T_HASH}                { return T_HASH; }
     {T_COMMENT}             { return T_COMMENT; }
     ^{T_COMMENT_ONE_SLASH}  { return T_COMMENT; }

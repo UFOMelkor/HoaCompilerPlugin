@@ -11,7 +11,7 @@ class HighlightNamespaces : Annotator {
         }
 
         val key = when(element.node.treeParent.elementType) {
-            PpTypes.SWITCH_NAMESPACE -> PpSyntaxHighlighter.NAMESPACE
+            PpTypes.NAMESPACE_CALL -> PpSyntaxHighlighter.NAMESPACE
             PpTypes.NAMESPACE -> PpSyntaxHighlighter.NAMESPACE
             else -> null
         }

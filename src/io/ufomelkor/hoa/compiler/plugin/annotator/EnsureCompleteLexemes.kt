@@ -23,12 +23,26 @@ class EnsureCompleteLexemes : Annotator {
             return
         }
 
+        if (element.lexemeName!!.prevSibling.textMatches(":") && element.namespace == null) {
+            holder
+                .createErrorAnnotation(element.lexemeName!!.prevSibling.textRange, "Expected namespace or name, got colon")
+        }
+
         if (element.regExp == null) {
             holder
                 .createErrorAnnotation(TextRange(
                     element.lastChild.textRange.endOffset - 1,
                     element.lastChild.textRange.endOffset
                 ), "Expected regular expression")
+        }
+
+        if (element is PpToken
+            && element.switchNamespace != null
+            && element.switchNamespace!!.namespaceCall == null
+        ) {
+            holder
+                .createErrorAnnotation(element.switchNamespace!!.textRange, "Expected namespace")
+                .registerFix(RemoveNamespaceSwitch(element.switchNamespace!!))
         }
     }
 }

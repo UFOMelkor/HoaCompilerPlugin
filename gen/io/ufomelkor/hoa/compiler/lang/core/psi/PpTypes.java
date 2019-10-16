@@ -39,6 +39,7 @@ public interface PpTypes {
   IElementType T_COMMENT = new PpTokenType("//[^\\n\\r]*");
   IElementType T_EXACTLY_N = new PpTokenType("T_EXACTLY_N");
   IElementType T_HASH = new PpTokenType("#");
+  IElementType T_HASH_LINE_START = new PpTokenType("T_HASH_LINE_START");
   IElementType T_KEPT_BEGIN = new PpTokenType("<");
   IElementType T_KEPT_END = new PpTokenType(">");
   IElementType T_NAME = new PpTokenType("[a-zA-Z_][a-zA-Z0-9_]*");

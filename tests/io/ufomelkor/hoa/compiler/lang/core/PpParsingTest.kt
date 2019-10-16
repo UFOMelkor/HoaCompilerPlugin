@@ -84,6 +84,24 @@ class PpParsingTest : ParsingTestCase("", "pp", PpParserDefinition()) {
 
     fun testERuleEmpty() = doTest(true)
 
+    fun testRuleBooleanNode() = doTest(true)
+
+    fun testRuleBooleansInlineNode() = doTest(true)
+
+    fun testERuleCallMissingParenthesis() = doTest(true)
+
+    fun testEmpty() = doTest(true)
+
+    fun testERuleOpeningParenthesis() = doTest(true)
+
+    fun testERuleClosingParenthesis() = doTest(true)
+
+    fun testERuleDoublePipe() = doTest(true)
+
+    fun testERuleNodeMissingName() = doTest(true)
+
+    fun testERuleInlineNodeMissingName() = doTest(true)
+
     override fun getTestDataPath(): String {
         return "testData/parsing"
     }
